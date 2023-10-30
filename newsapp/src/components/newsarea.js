@@ -12,7 +12,7 @@ function Newsarea(props) {
         progress: 10,
         totalResults: 0,
         page: 1,
-        loading:true,
+        loading: true,
     })
     // here usestate([]) this square bracket specify the array whatever data you should set in this usestate that will convert into array 'this is very imp for using map() function'
     const [data, setdata] = useState([]);
@@ -21,7 +21,7 @@ function Newsarea(props) {
     async function fetchdata() {
         settext((prevState) => ({
             ...prevState,
-            loading:true,
+            loading: true,
             category: text.category,
             progress: 60,
         }))
@@ -57,9 +57,9 @@ function Newsarea(props) {
         }));
     }
 
-    let typeofnews=text.category;
-    let capitalizedcategory=typeofnews.charAt(0).toUpperCase()+typeofnews.slice(1)
-    document.title=`${capitalizedcategory} - NewsBook`
+    let typeofnews = text.category;
+    let capitalizedcategory = typeofnews.charAt(0).toUpperCase() + typeofnews.slice(1)
+    document.title = `${capitalizedcategory} - NewsBook`
     return (
         <div>
             <LoadingBar color='yellow' height={3} progress={text.progress} />
@@ -72,9 +72,9 @@ function Newsarea(props) {
                 dataLength={data.length}
                 next={fetchMoreData}
                 hasMore={data.length < text.totalResults}
-                loader={<Loader/>}
+                loader={<Loader />}
             >
-                {text.loading && <Loader/>}
+                {text.loading && <Loader />}
                 <div className=' flex flex-wrap justify-center'>
                     {data.map((article, index) => (
                         <Mainarea

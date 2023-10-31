@@ -36,6 +36,7 @@ function Newsarea(props) {
                 ...prevState,
                 category: text.category,
                 progress: 100,
+                loading:false,
                 totalResults: jsonresult.totalResults,
             }))
         } else {
@@ -72,7 +73,7 @@ function Newsarea(props) {
                 dataLength={data.length}
                 next={fetchMoreData}
                 hasMore={data.length < text.totalResults}
-                loader={<Loader />}
+                loader={<Loader/>}
             >
                 {text.loading && <Loader />}
                 <div className=' flex flex-wrap justify-center'>

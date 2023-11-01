@@ -11,7 +11,7 @@ import {
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Navbar/>}>
-        <Route path='/' element={<Newsarea key='General' category="Home"/>}/>
+        <Route path='/' element={<Newsarea key='General' category="General"/>}/>
         <Route path='/general' element={<Newsarea key="General" category='General'/>}/>
         <Route path='/Business' element={<Newsarea key="Business" category='Business'/>}/>
         <Route path='/Entertainment' element={<Newsarea key="Entertainment" category='Entertainment'/>}/>

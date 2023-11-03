@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 // import NewsArea from './components/newsarea';
 import Navbar from './components/navbar';
@@ -8,6 +9,7 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router-dom";
+
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Navbar/>}>
@@ -19,11 +21,14 @@ const router=createBrowserRouter(
         <Route path='/Science' element={<Newsarea key="Science" category='Science'/>}/>
         <Route path='/Sports' element={<Newsarea key="Sports" category='Sports'/>}/>
         <Route path='/Technology' element={<Newsarea key="Technology" category='Technology'/>}/>
+        <Route path='/in' element={<Newsarea key="in" country='in'/>}/>
+        <Route path='/us' element={<Newsarea key="us" country='US'/>}/>
     </Route>
   )
 )
 
 function App() {
+
   return (
     <div className='bg-blue-300 '>
     <RouterProvider router={router}/>

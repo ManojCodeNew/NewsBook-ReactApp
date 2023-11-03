@@ -7,9 +7,10 @@ import LoadingBar from 'react-top-loading-bar';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Newsarea(props) {
-    const [country,setcountry]=useState('in')
+    // const [country,setcountry]=useState('in')
     const [text, settext] = useState({
         category: props.category,
+        country:props.country,
         progress: 10,
         totalResults: 0,
         page: 1,
@@ -24,11 +25,12 @@ function Newsarea(props) {
             ...prevState,
             loading: true,
             category: text.category,
+            country:text.country,
             progress: 60,
         }))
-        console.log(country);
+        console.log(text.country);
         // let api = `https://newsapi.org/v2/top-headlines?country=${country}&category=${text.category}&sortBy=publishedAt&Page=${text.page}&PageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`
-        let api = `https://newsapi.org/v2/top-headlines?country=${country}&category=${text.category}&sortBy=publishedAt&page=${text.page}&pageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`;
+        let api = `https://newsapi.org/v2/top-headlines?country=${text.country}&category=${text.category}&sortBy=publishedAt&page=${text.page}&pageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`;
         let apifetch = await fetch(api)
         let jsonresult = await apifetch.json();
         if (jsonresult.articles && jsonresult.articles.length > 0) {
@@ -52,7 +54,7 @@ function Newsarea(props) {
     useEffect(() => {
         fetchdata()
         // React Hook useEffect has a missing dependency: 'text.category'. Either include it or remove the dependency array :-when you getting this error you should write 'text.category'or that error given specific name 
-    }, [text.category, text.page,setcountry])
+    }, [text.category, text.page])
 
     function fetchMoreData() {
         settext((prevState) => ({
@@ -60,20 +62,20 @@ function Newsarea(props) {
             page: prevState.page + 1,
         }));
     }
-    function fetchcountry(cn){
-        setcountry(cn)
+    // function fetchcountry(cn){
+    //     setcountry(cn)
 
-    }
+    // }
 
     let typeofnews = text.category;
     let capitalizedcategory = typeofnews.charAt(0).toUpperCase() + typeofnews.slice(1)
     document.title = `${capitalizedcategory} - NewsBook`
     return (
         <div>
-            <div className='flex flex-row p-2'>
+            {/* <div className='flex flex-row p-2'>
                 <button onClick={() =>{fetchcountry('in')}} className='p-2'>India</button>
                 <button onClick={() =>{fetchcountry('us')}}>US</button>
-            </div>
+            </div> */}
             <LoadingBar color='yellow' height={3} progress={text.progress} />
             <div className=' text-2xl  text-gray-200 m-3 '>
                 <h1 className='text-xl font-boldfontsize-md  text-center text-black mb-3 mt-3'><strong><span className='bg-black text-white p-1 rounded'>NewsBook -TOP <span className='text-red-600'>{capitalizedcategory}</span> HeadLines</span></strong></h1>

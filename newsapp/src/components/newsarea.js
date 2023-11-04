@@ -7,10 +7,8 @@ import LoadingBar from 'react-top-loading-bar';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function Newsarea(props) {
-    // const [country,setcountry]=useState('in')
     const [text, settext] = useState({
         category: props.category,
-        country:props.country,
         progress: 10,
         totalResults: 0,
         page: 1,
@@ -19,7 +17,7 @@ function Newsarea(props) {
     // here usestate([]) this square bracket specify the array whatever data you should set in this usestate that will convert into array 'this is very imp for using map() function'
     const [data, setdata] = useState([]);
     // useeffect() function used to fetch data in function based component in react
-
+    const [country,setcountry]=useState('in')
     async function fetchdata() {
         settext((prevState) => ({
             ...prevState,
@@ -28,14 +26,15 @@ function Newsarea(props) {
             country:text.country,
             progress: 60,
         }))
-        console.log(text.country);
+        console.log(country);
         // let api = `https://newsapi.org/v2/top-headlines?country=${country}&category=${text.category}&sortBy=publishedAt&Page=${text.page}&PageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`
-        let api = `https://newsapi.org/v2/top-headlines?country=${text.country}&category=${text.category}&sortBy=publishedAt&page=${text.page}&pageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`;
+        let api = `https://newsapi.org/v2/top-headlines?country=${country}&category=${text.category}&sortBy=publishedAt&page=${text.page}&pageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`;
         let apifetch = await fetch(api)
         let jsonresult = await apifetch.json();
+        console.log(jsonresult);
         if (jsonresult.articles && jsonresult.articles.length > 0) {
-            // 
-            setdata([...data, ...jsonresult.articles])
+            //
+            setdata([...data,...jsonresult.articles])
             // 
             settext((prevState) => ({
                 ...prevState,
@@ -62,23 +61,31 @@ function Newsarea(props) {
             page: prevState.page + 1,
         }));
     }
-    // function fetchcountry(cn){
-    //     setcountry(cn)
-
-    // }
+    function fetchcountry(cn){
+        setcountry(cn)
+        settext((prevState) => ({
+            ...prevState,
+            page: -1,
+            totalResults:-1,
+            loading:true,
+        }));
+        setdata([]);
+        fetchdata()
+    console.log(data);
+    }
 
     let typeofnews = text.category;
     let capitalizedcategory = typeofnews.charAt(0).toUpperCase() + typeofnews.slice(1)
     document.title = `${capitalizedcategory} - NewsBook`
     return (
         <div>
-            {/* <div className='flex flex-row p-2'>
-                <button onClick={() =>{fetchcountry('in')}} className='p-2'>India</button>
-                <button onClick={() =>{fetchcountry('us')}}>US</button>
-            </div> */}
+            <div className='flex flex-row p-2'>
+                <button onClick={()=>{fetchcountry("in")}} className='p-2'>India</button>
+                <button onClick={()=>{fetchcountry("us")}}>US</button>
+            </div>
             <LoadingBar color='yellow' height={3} progress={text.progress} />
             <div className=' text-2xl  text-gray-200 m-3 '>
-                <h1 className='text-xl font-boldfontsize-md  text-center text-black mb-3 mt-3'><strong><span className='bg-black text-white p-1 rounded'>NewsBook -TOP <span className='text-red-600'>{capitalizedcategory}</span> HeadLines</span></strong></h1>
+                <h1 className='text-xl font-boldfontsize-md  text-center text-black mb-3 mt-3'><strong><span className='bg-black text-white p-1 rounded'>NewsBook -TOP <span className='text-red-600'>{capitalizedcategory}</span> HeadLines</span>in {country}</strong></h1>
 
                 {/* <h1 className='text-center'><strong>TOP-{text.category} HEADLINES</strong></h1> */}
             </div>

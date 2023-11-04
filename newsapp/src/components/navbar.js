@@ -15,9 +15,7 @@ function navbar() {
                     <NavLink key="Science" to='/Science' className="p-1 mr-4 hover:text-yellow-600">Science</NavLink >
                     <NavLink key="sports" to='/Sports' className="p-1 mr-4 hover:text-yellow-600">Sports</NavLink >
                     <NavLink key="technology" to='/Technology' className="p-1 mr-4 hover:text-yellow-600">Technology</NavLink >
-                    <NavLink key="in" to='/in' className="p-1 mr-4 hover:text-yellow-600">in</NavLink >
-                    <NavLink key="us" to='/us' className="p-1 mr-4 hover:text-yellow-600">us</NavLink >
-                </div>
+            </div>
                 <div>
                     <Outlet />
                 </div>

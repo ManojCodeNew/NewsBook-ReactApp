@@ -65,7 +65,7 @@ function Newsarea(props) {
         setcountry(cn)
         settext((prevState) => ({
             ...prevState,
-            page: -1,
+            page: 1,
             totalResults:-1,
             loading:true,
         }));
@@ -80,8 +80,8 @@ function Newsarea(props) {
     return (
         <div>
             <div className='flex flex-row p-2'>
-                <button onClick={()=>{fetchcountry("in")}} className='p-2'>India</button>
-                <button onClick={()=>{fetchcountry("us")}}>US</button>
+                <button onClick={()=>{fetchcountry("in")}} className='p-1 border border-black rounded-md hover:bg-blue-700 hover:text-white'>India</button>
+                <button onClick={()=>{fetchcountry("us")}}className='p-1 ml-3 border border-black rounded-md hover:bg-blue-700 hover:text-white'>   US  </button>
             </div>
             <LoadingBar color='yellow' height={3} progress={text.progress} />
             <div className=' text-2xl  text-gray-200 m-3 '>

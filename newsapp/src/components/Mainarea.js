@@ -9,7 +9,7 @@ function Mainarea(props) {
         sourceurl: props.sourceurl,
         sourcename: props.sourcename,
         publisheddate: props.publisheddate,
-        
+
     })
     let notfounding = "https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-32.png"
     return (
@@ -18,8 +18,8 @@ function Mainarea(props) {
                 <div className=" m-2 max-w-sm mx-auto bg-white rounded-lg shadow-md" >
                     <div className='w-70 h-100 bg-gray-200 p-4 m-4'>
                         <div className='bg-gradient-to-r from-red-600 to-red-900 hover:from-black hover:to-black text-md'>
-                                <h2 className='pl-3 font-semibold text-white'> {data.sourcename} </h2>
-                        </div> 
+                            <h2 className='pl-3 font-semibold text-white'> {data.sourcename} </h2>
+                        </div>
                         <img src={!data.imgurl ? notfounding : data.imgurl} className="w-full h-48" alt="Loding..." />
                         <div className="p-2 m-1">
                             <h1 className=""><strong>{data.title}</strong></h1>

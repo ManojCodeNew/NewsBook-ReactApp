@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 function Mainarea(props) {
 
-    const [data, getdata] = useState({
+    const [data] = useState({
         title: props.title,
         description: props.description,
         Author: props.Author,

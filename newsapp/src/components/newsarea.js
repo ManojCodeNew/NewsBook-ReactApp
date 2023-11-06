@@ -26,8 +26,8 @@ function Newsarea(props) {
             country: text.country,
             progress: 60,
         }))
-        console.log(country);
-        // let api = `https://newsapi.org/v2/top-headlines?country=${country}&category=${text.category}&sortBy=publishedAt&Page=${text.page}&PageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`
+        
+        
         let api = `https://newsapi.org/v2/top-headlines?country=${country}&category=${text.category}&sortBy=publishedAt&page=${text.page}&pageSize=15&apiKey=b1aee878476a48c1be0344d6c2cabe9c`;
         let apifetch = await fetch(api)
         let jsonresult = await apifetch.json();
@@ -52,12 +52,14 @@ function Newsarea(props) {
     // 
     useEffect(() => {
         fetchdata()
-        // React Hook useEffect has a missing dependency: 'text.category'. Either include it or remove the dependency array :-when you getting this error you should write 'text.category'or that error given specific name 
+       // eslint-disable-next-line
     }, [text.category, text.page])
+     // React Hook useEffect has a missing dependency: 'text.category'. Either include it or remove the dependency array :-when you getting this error you should write 'text.category'or that error given specific name 
 
     function fetchMoreData() {
         settext((prevState) => ({
             ...prevState,
+            loading:false,
             page: prevState.page + 1,
         }));
     }
@@ -93,7 +95,7 @@ function Newsarea(props) {
                 dataLength={data.length}
                 next={fetchMoreData}
                 hasMore={data.length < text.totalResults}
-                loader={<Loader />}
+                loader={<Loader/>}
             >
                 {text.loading && <Loader />}
                 <div className=' flex flex-wrap justify-center'>
